@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Frog : MonoBehaviour
 {
+    public GameManager GameManager;
     public float Velocity = 1f;
     private Rigidbody2D FrogRB;
     private float speed = 5;
@@ -30,6 +31,16 @@ public class Frog : MonoBehaviour
 
         //jump
         if (Input.GetKeyDown(KeyCode.Space))
+        {
             FrogRB.velocity = Vector2.up * Velocity;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag != "Ground")
+            GameManager.GameOver();
+        //if (collision.gameObject.tag != "Life")
+        //    GameManager.GameOver();
     }
 }

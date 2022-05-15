@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    public static int ScoreNumber = 0;
+    public static float ScoreNumber = 0;
 
     private void Start()
     {
@@ -14,6 +15,7 @@ public class Score : MonoBehaviour
 
     private void Update()
     {
-        GetComponent<Text>().text = ScoreNumber.ToString();
+        ScoreNumber += Time.deltaTime;
+        GetComponent<Text>().text = Math.Round(ScoreNumber, 2).ToString();
     }
 }
