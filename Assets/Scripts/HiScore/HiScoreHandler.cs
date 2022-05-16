@@ -10,12 +10,15 @@ public class HiScoreHandler : MonoBehaviour
     public static HiScoreHandler Instance;
     private void Awake()
     {
-        StringPath = Application.streamingAssetsPath+"/" + StringPath;
+        StringPath = @"..\"+StringPath;
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+    }
+    private void Start()
+    {
         ReadString();
     }
     public Dictionary<int, HiScore> HighScorePairs= new Dictionary<int, HiScore>();
@@ -38,18 +41,21 @@ public class HiScoreHandler : MonoBehaviour
 
     void ReadString()
     {
+        if (File.Exists(StringPath))
+        {
+            WriteString("");
+        }
         StreamReader reader = new StreamReader(StringPath);
         string jsonFile=reader.ReadToEnd();
         reader.Close();
-        reader.Dispose();
         addToDictionary(HiScore.CreateFromJSON(jsonFile));
     }
 
     void WriteString(string jsonString)
     {
+        if (string.IsNullOrEmpty(jsonString)) return;
         StreamWriter writer = new StreamWriter(StringPath, false);
         writer.WriteLine(jsonString);
-        writer.Dispose();
         writer.Close();
     }
     private void OnDisable()

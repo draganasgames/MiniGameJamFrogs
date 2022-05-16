@@ -27,8 +27,10 @@ public class HiScoreUIHandler : MonoBehaviour
         while (hiScoreSpawners.Count>0)
         {
             var hiScore = hiScoreSpawners[0];
+            DestroyImmediate(hiScore.gameObject);
             hiScoreSpawners.RemoveAt(0);
-            Destroy(hiScore);
         }
+        hiScoreSpawners.Clear();
+        id = 0;
     }
 }
