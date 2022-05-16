@@ -28,12 +28,12 @@ public class Frog : MonoBehaviour
             Height = transform.position.y;
         }
         //walk
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.position += Vector3.right * speed * Time.deltaTime;
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
-        else if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.position += Vector3.right * -speed * Time.deltaTime;
             transform.rotation = Quaternion.Euler(0, 0, 0);
